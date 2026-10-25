@@ -1,12 +1,21 @@
+import unittest
 from selenium import webdriver
 
-browser = webdriver.Firefox()
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
 
-# browser.get("https://google.com")
+    def tearDown(self):
+        self.browser.quit()
 
-# assert "Google" in browser.title
+    def test_start_todo_list(self):
+        self.browser.get("http://localhost:8000")
 
-browser.get("http://localhost:8000")
+        self.assertIn("To-Do", self.browser.title)
 
-assert "Congratulations!" in browser.title
-print("OK")
+        self.fail("Finish the test!")
+
+        [...]
+
+if __name__ == "__main__":
+    unittest.main()
